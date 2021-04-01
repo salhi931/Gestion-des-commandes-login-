@@ -47,7 +47,7 @@ export class CommandeService implements OnInit{
     if (this.articlesachetes.length > 0){
       // tslint:disable-next-line:prefer-for-of
       for ( let i = 0; i < this.articlesachetes.length; i++){
-       prix = prix + this.articlesachetes[i].quantite * (this.articles[index].prix);
+        prix = prix + this.articlesachetes[i].quantite * (this.articles[index].prix);
       }
     }
     return prix;
@@ -67,18 +67,18 @@ export class CommandeService implements OnInit{
     this.http
       .get('https://ng-serve-353a7-default-rtdb.firebaseio.com/commandes.json')
       .pipe(map(responseData => {
-        const postsArray = [];
-        for (const key in responseData) {
-          if (responseData.hasOwnProperty(key)) {
-            postsArray.push({ ...responseData[key], id: key });
+          const postsArray = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postsArray.push({ ...responseData[key], id: key });
+            }
           }
-        }
-        return postsArray;
-      })
+          return postsArray;
+        })
       )
       .subscribe(data => {
         this.commandes = data;
-        });
+      });
 
   }
 

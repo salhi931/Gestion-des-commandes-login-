@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backoffice",
+    "\\backoffice\\src",
+    "\\backoffice\\src\\app",
+    "\\backoffice\\src\\app\\commande",
+    "\\backoffice\\src\\app\\commande\\lancement-commande"
+  ],
+  "SelectedNode": "\\backoffice\\src\\app\\commande\\lancement-commande\\lancement-commande.component.html",
+  "PreviewInSolutionExplorer": false
+}

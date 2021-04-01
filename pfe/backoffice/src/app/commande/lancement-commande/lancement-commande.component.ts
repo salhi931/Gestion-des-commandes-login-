@@ -29,10 +29,10 @@ export class LancementCommandeComponent  implements OnInit {
   article_selected;
   article_quantite;
   magasins;
-   client_id_selected = 0;
+  client_id_selected = 0;
   commercial_selected: any;
   magasin_selected;
-   auto: any   ;
+  auto: any   ;
   prix_totale = 0;
   loading;
   commandeerreur = false;
@@ -87,26 +87,26 @@ export class LancementCommandeComponent  implements OnInit {
 
   getcommande(){
     if (this.client_id_selected !==  undefined ) {
-    this.commande.client_id1 = this.client_id_selected ;
-    this.commande.client_name = this.clients[this.client_id_selected].clientname ;
-    this.commande.commercial_name = this.commercial_selected ;
-    this.commande.magasin_name = this.magasin_selected ;
-    this.commande.articlesachetes = this.articlesachetes;
-    this.commande.totals_prix = this.prix_totale;
-    this.infos.commandes.push(this.commande);
-    this.loading = true;
-    console.log(this.infos.commandes);
-    this.http.post('https://ng-serve-353a7-default-rtdb.firebaseio.com/commandes.json', this.commande).subscribe(data => {
+      this.commande.client_id1 = this.client_id_selected ;
+      this.commande.client_name = this.clients[this.client_id_selected].clientname ;
+      this.commande.commercial_name = this.commercial_selected ;
+      this.commande.magasin_name = this.magasin_selected ;
+      this.commande.articlesachetes = this.articlesachetes;
+      this.commande.totals_prix = this.prix_totale;
+      this.infos.commandes.push(this.commande);
+      this.loading = true;
+      console.log(this.infos.commandes);
+      this.http.post('https://ng-serve-353a7-default-rtdb.firebaseio.com/commandes.json', this.commande).subscribe(data => {
         console.log(data);
       }, error => {alert('error lors de l\'ajout de la commande'); }, () => {alert('vous avez lancez une commande'); } );
-    // alert('vous avez lancez une commande');
+      // alert('vous avez lancez une commande');
 
-    setTimeout(
+      setTimeout(
         () => {
           this.router.navigate(['/list-commande'], {relativeTo: this.route});
         }, 1000
       );
-     }
+    }
 
   }
 
@@ -119,6 +119,6 @@ export class LancementCommandeComponent  implements OnInit {
       this.commandeerreur = true;
 
     }
-   }
+  }
 
 }

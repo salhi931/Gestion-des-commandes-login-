@@ -1,0 +1,90 @@
+<div class="row" >
+  <div class="col-md-3">
+    <label>id du client </label>
+    <select class=form-control [(ngModel)]="client_id_selected">
+      <option value= {{i.clientid}} *ngFor="let i of clients">{{i.clientid}} </option>
+
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label >nom du client </label>
+    <output type="text" class="form-control"     > {{clients[client_id_selected].clientname}}  </output>
+  </div>
+</div>
+<br>
+<div class="row" >
+  <div class="col-md-3">
+    <label>Commercial </label>
+    <select class=form-control [(ngModel)]="commercial_selected">
+      <option value= {{i.commercialname}} *ngFor="let i of commerciaux">{{i.commercialname}} </option>
+
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label>Magasin </label>
+    <select class=form-control [(ngModel)]="magasin_selected">
+      <option value= {{i.magasinname}} *ngFor="let i of magasins">{{i.magasinname}} </option>
+
+    </select>
+  </div>
+</div>
+<br>
+<div class="row" >
+  <div class="col-md-3">
+      <label>article </label><br>
+
+    <mat-form-field class="example-full-width">
+      <mat-label> </mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="article"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto" [(ngModel)]="article_selected">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          <div>
+            <img style="width: 60px; height: 30px; " [src] = "getimgurl(option)" />
+            <span> {{option}}</span>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  </div>
+  <div class="col-md-3">
+      <label>quantite</label><br><br>
+
+      <input type="number" class="form-control" placeholder="quantite" [(ngModel)]="article_quantite" >
+    <div class="col-md-5"><button class="btn btn-sm btn-success" (click)="getarticle()">Add article</button>
+     </div></div>
+  <div class="col-md-3">
+    <label>prix totale</label><br><br>
+    <output  type="text" class="form-control"  placeholder="prix">{{prix_totale}} </output>
+  </div>
+</div>
+<h2>articles commandes</h2>
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">articles</th>
+    <th scope="col">quantite</th>
+    <th scope="col">prix unitaire</th>
+    <th scope="col"> *</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let articleachetes of articlesachetes; let i = index "   >
+    <th scope="row">{{  i+1}}</th>
+    <td>  {{ articleachetes.articlename }}  </td>
+    <td>{{ articleachetes.quantite | number}}</td>
+    <td>{{ articleachetes.prix | number}}</td>
+    <td><button class="btn btn-sm btn-danger" style="position : absolute  ;" (click)="delete(i)">delelte</button> </td>
+  </tr>
+  </tbody>
+</table>
+<button class="btn btn-primary" (click)="getcommande()"  [disabled]="commandeerreur" > submit </button>
+<mat-spinner *ngIf="loading" ></mat-spinner>

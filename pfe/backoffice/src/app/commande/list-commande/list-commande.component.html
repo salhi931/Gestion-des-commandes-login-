@@ -1,0 +1,117 @@
+
+
+<mat-spinner *ngIf="loading" ></mat-spinner>
+<div *ngIf="!details" >
+    <div class="col-md-50">
+      <button class="btn-primary" (click)="deletcommandes()">supprimer all</button>
+    </div>
+    <table class="table table-striped" >
+
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">client</th>
+        <th scope="col">commercial</th>
+        <th scope="col"> *</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let commande of infos.commandes; let i = index "   >
+        <th scope="row">{{i+1}}</th>
+        <td>  {{ commande.client_name }}  </td>
+        <td>{{ commande.commercial_name  }}</td>
+        <td><button class="btn btn-sm btn-success"  (click)="detail(i)">details</button> </td>
+      </tr>
+      </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container" *ngIf="details">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="row p-5">
+            <div class="col-md-6">
+              <img src="http://tamtamcajou.com/wp-content/uploads/2019/09/panier-vers-commande.jpg">
+            </div>
+
+
+            <div class="col-md-6 text-right">
+              <p class="font-weight-bold mb-1"><button class="btn btn-sm btn-success"   (click)="details = !details">Retour </button></p>
+              <p class="text-muted"> </p>
+            </div>
+          </div>
+
+          <hr class="my-5">
+
+          <div class="row pb-5 p-5">
+            <div class="col-md-6">
+              <p class="font-weight-bold mb-4"  ><label>Nom du client :</label> {{client_name}}</p>
+              <p class="mb-1"><label>Commercial :</label> {{commercial_name}}</p>
+
+            </div>
+
+
+          </div>
+
+          <div class="row p-5">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th class="border-0 text-uppercase small font-weight-bold">ID</th>
+                  <th class="border-0 text-uppercase small font-weight-bold">article</th>
+                   <th class="border-0 text-uppercase small font-weight-bold">Quantity</th>
+                  <th class="border-0 text-uppercase small font-weight-bold">Unit Cost</th>
+                  <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let article of articlesachetes; let j = index ">
+                  <td>{{j+1 }}</td>
+                  <td>{{article.articlename}}</td>
+                  <td>{{article.quantite}}</td>
+                  <td>10</td>
+                  <td>${{article.quantite*10}}</td>
+                 </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+            <div class="py-3 px-5 text-right">
+              <div class="mb-2">Grand Total</div>
+              <div class="h2 font-weight-light">${{prixtotal}}</div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

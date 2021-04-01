@@ -11,6 +11,8 @@ import {map} from 'rxjs/operators';
 export class CommandeService implements OnInit{
   constructor( private http: HttpClient) {
   }
+  loading = false;
+  articlesachetes: Articleachetes[] = [];
   clients = [
     {clientname : 'client1',
       clientid : 0},
@@ -38,6 +40,25 @@ export class CommandeService implements OnInit{
     {magasinname: 'magasin3'}
   ];
   commandes: Commandes[] ;
+  ligin = new EventEmitter<boolean>();
+  // tslint:disable-next-line:typedef
+  calculerprixarticle(index){
+    let prix = 0;
+    if (this.articlesachetes.length > 0){
+      // tslint:disable-next-line:prefer-for-of
+      for ( let i = 0; i < this.articlesachetes.length; i++){
+       prix = prix + this.articlesachetes[i].quantite * (this.articles[index].prix);
+      }
+    }
+    return prix;
+
+  }
+  // tslint:disable-next-line:variable-name
+  ajouterarticle( a: number , article_selected: any, article_quantite: number ){
+    // tslint:disable-next-line:max-line-length
+    if ( article_selected !== undefined &&   article_quantite !== undefined && a >= 0 &&  article_quantite > 0 ) {this.articlesachetes.push({articlename: article_selected,  quantite: article_quantite, prix : this.articles[a].prix }); }
+    else { alert('verifierz que vous avez un article valide'); }
+  }
   deletcommandes(){
     return this.http
       .delete('https://ng-serve-353a7-default-rtdb.firebaseio.com/commandes.json');
@@ -60,7 +81,6 @@ export class CommandeService implements OnInit{
         });
 
   }
-  ligin = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.getcommandes();
